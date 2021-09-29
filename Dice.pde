@@ -2,13 +2,14 @@ Die myDie;
 
 void setup(){
   noLoop();
-  size(300,300);
+  size(320,320);
 }
 
 void draw(){
   for (int i = 20; i <= 280; i += 40){
     myDie = new Die(i,150);
     myDie.show();
+    myDie.roll();
   }
 }
 
@@ -29,11 +30,24 @@ class Die{
     
     void roll(){
       //your code here
+      int num = (int) (Math.random() * 6) + 1;
+      System.out.println(num);
+      for (int i = 1; i <= num; i++){
+        switch (num) {
+            case 1:
+              ellipse(myX + (0.5 * mySize), myY + (0.5 * mySize), 5, 5);
+               break;
+        }
+        fill(0);
+        ellipse(myX+5*i,myY,5,5);
+      }
+      
     }
     
     void show(){
       //your code here
-      fill(0);
+      stroke(0);
+      fill(255);
       rect(myX, myY, mySize, mySize);
     }
 }
