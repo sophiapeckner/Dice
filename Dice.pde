@@ -39,37 +39,31 @@ class Die {
         ellipse(myX + (0.5 * mySize), myY + (0.5 * mySize), 5, 5);
         break;
       case 2:
-        ellipse(myX + (int)(mySize/5), myY + (int)(mySize/5), 5, 5);
-        ellipse(myX + (mySize - (int)(mySize/5)), myY + (mySize - (int)(mySize/5)), 5, 5);
+        showTwo();
         break;
       case 3:
-        ellipse(myX + (int)(mySize/5), myY + (int)(mySize/5), 5, 5);
-        ellipse(myX + (mySize - (int)(mySize/5)), myY + (mySize - (int)(mySize/5)), 5, 5);
+        showTwo();
         ellipse(myX + (0.5 * mySize), myY + (0.5 * mySize), 5, 5); 
         break;
       case 4:
-        ellipse(myX + (int)(mySize/5), myY + (int)(mySize/5), 5, 5);
+        showTwo();
         ellipse(myX + (mySize - (int)(mySize/5)), myY + (int)(mySize/5), 5, 5);
-        ellipse(myX + (mySize - (int)(mySize/5)), myY + (mySize - (int)(mySize/5)), 5, 5); 
         ellipse(myX + (int)(mySize/5), myY + (mySize - (int)(mySize/5)), 5, 5);
         break;
       case 5:
-        ellipse(myX + (int)(mySize/5), myY + (int)(mySize/5), 5, 5);
+        showTwo();
         ellipse(myX + (mySize - (int)(mySize/5)), myY + (int)(mySize/5), 5, 5);
-        ellipse(myX + (mySize - (int)(mySize/5)), myY + (mySize - (int)(mySize/5)), 5, 5); 
         ellipse(myX + (int)(mySize/5), myY + (mySize - (int)(mySize/5)), 5, 5);
         ellipse(myX + (0.5 * mySize), myY + (0.5 * mySize), 5, 5);
         break;
       case 6:
-        ellipse(myX + (int)(mySize/5), myY + (int)(mySize/5), 5, 5);
+        showTwo();
         ellipse(myX + (mySize - (int)(mySize/5)), myY + (int)(mySize/5), 5, 5);
-        ellipse(myX + (mySize - (int)(mySize/5)), myY + (mySize - (int)(mySize/5)), 5, 5); 
         ellipse(myX + (int)(mySize/5), myY + (mySize - (int)(mySize/5)), 5, 5);
         ellipse(myX + (int)(mySize/5), myY + (0.5 * mySize), 5, 5);
         ellipse(myX + (mySize - (int)(mySize/5)), myY + (0.5 * mySize), 5, 5);
         break;
       }
-      //ellipse(myX+5*i, myY, 5, 5);
     }
   }
 
@@ -78,5 +72,10 @@ class Die {
     stroke(0);
     fill(255);
     rect(myX, myY, mySize, mySize, 5);
+  }
+  
+  void showTwo() {
+    ellipse(myX + (int)(mySize/5), myY + (int)(mySize/5), 5, 5);
+    ellipse(myX + (mySize - (int)(mySize/5)), myY + (mySize - (int)(mySize/5)), 5, 5);
   }
 }
