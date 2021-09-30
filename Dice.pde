@@ -6,7 +6,7 @@ void setup() {
 }
 
 void draw() {
-  for (int i = 20; i <= 280; i += 40) {
+  for (int i = 20; i <= 270; i += 40) {
     myDie = new Die(i, 150);
     myDie.show();
     myDie.roll();
@@ -77,6 +77,6 @@ class Die {
     //your code here
     stroke(0);
     fill(255);
-    rect(myX, myY, mySize, mySize);
+    rect(myX, myY, mySize, mySize, 5);
   }
 }
