@@ -1,20 +1,41 @@
+//http://learningprocessing.com/examples/chp18/example-18-01-userinput
+
+import g4p_controls.*;
 Die myDie;
 
+PFont f;
+char typing;
+
 void setup() {
-  noLoop();
+  f = createFont("Arial",16);
   size(320, 320);
+  //noLoop();
 }
 
 void draw() {
-  for (int i = 20; i <= 270; i += 40) {
-    myDie = new Die(i, 150);
-    myDie.show();
-    myDie.roll();
+  textFont(f);
+  text(typing,240,170);
+}
+
+void keyPressed() {
+  // If the return key is pressed, save the String and clear it
+  if (key == '\n') {
+    
+    // A String can be cleared by setting it equal to ""
+    //typing = ""; 
+  } else {
+    // Otherwise, concatenate the String
+    // Each character typed by the user is added to the end of the String variable.
+    typing = key; 
   }
 }
 
 void mousePressed() {
-  redraw();
+  for (int i = 20; i <= 210; i += 80) {
+    myDie = new Die(i, 150);
+    myDie.show();
+    myDie.roll();
+  }
 }
 
 class Die {
