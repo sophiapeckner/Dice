@@ -1,4 +1,4 @@
-int squareSize = 35;
+int squareSize = 37;
 int squareWidth = 400;
 
 void setup(){
