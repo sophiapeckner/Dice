@@ -9,14 +9,27 @@ void setup() {
 }
 
 void draw() {
-  background(50,255,255,0.5);
-  System.out.println(snakeX);
+  //background(50,255,255,0.5);
+  drawGrid();
   myDie = new Die(snakeX, snakeY, horizontal);
   myDie.show();
 }
 
-void mousePressed() {
-  redraw();
+void drawGrid() {
+  noStroke();
+  boolean light = true;
+  for (int x = 0; x <= 320; x += 30){
+    for (int y = 0; y <= 320; y += 30){
+      if (light) {
+        fill(210,255,152);  //light
+        light = false;
+      } else {
+        fill(200,255,122);  //dark
+        light = true;
+      }
+      rect(x,y,30,30);
+    }
+  }
 }
 
 void keyPressed() {
@@ -35,12 +48,18 @@ void keyPressed() {
     horizontal = false;
     redraw();
   }
+  else if (keyCode == DOWN){
+    snakeY += 5;
+    horizontal = false;
+    redraw();
+  }
 }
 
 class Die {
   //member variable declarations here
   int mySize, myX, myY, myValue;
   boolean horizontal;
+  int mySum;
   Die(int x, int y, boolean h) {   //constructor   
     //variable initializations here
     mySize = 30;
@@ -52,6 +71,8 @@ class Die {
   void roll(int x, int y) {
     //your code here
     int num = (int) (Math.random() * 6) + 1;
+    mySum += num;
+    
     fill(0);
     for (int i = 1; i <= num; i++) {
       switch (num) {
@@ -94,6 +115,7 @@ class Die {
 
   void show() {
     //your code here
+    mySum = 0;
     if (horizontal){
       stroke(0);
       
@@ -112,16 +134,19 @@ class Die {
       stroke(0);
       
       fill(255);
-      rect(myX, myY, mySize, mySize, 5);
-      roll(myX, myY);
+      rect(myX+(mySize*2), myY-60, mySize, mySize, 5);
+      roll(myX+(mySize*2), myY-60);
       
       fill(255);
-      rect(myX, myY+30, mySize, mySize, 5);
-      roll(myX, myY+30);
+      rect(myX+(mySize*2), myY-30, mySize, mySize, 5);
+      roll(myX+(mySize*2), myY-30);
       
       fill(255);
-      rect(myX, myY+60, mySize, mySize, 5);
-      roll(myX, myY+60);
+      rect(myX+(mySize*2), myY, mySize, mySize, 5);
+      roll(myX+(mySize*2), myY);
     }
+    textSize(70);
+    fill(140);
+    text(mySum, 130,70);
   }
 }
