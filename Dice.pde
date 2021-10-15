@@ -73,6 +73,7 @@ class Die {
     int num = (int) (Math.random() * 6) + 1;
     mySum += num;
     
+    
     fill(0);
     for (int i = 1; i <= num; i++) {
       switch (num) {
@@ -116,35 +117,22 @@ class Die {
   void show() {
     //your code here
     mySum = 0;
+    stroke(0);
     if (horizontal){
-      stroke(0);
-      
-      fill(255);
-      rect(myX, myY, mySize, mySize, 5);
-      roll(myX, myY);
-      
-      fill(255);
-      rect(myX+30, myY, mySize, mySize, 5);
-      roll(myX+30, myY);
-      
-      fill(255);
-      rect(myX+60, myY, mySize, mySize, 5);
-      roll(myX+60, myY);
+      for (int i = 0; i < 3; i ++){
+        fill(255);
+        rect(myX + (i*30), myY, mySize, mySize, 5);
+        roll(myX + (i*30), myY);
+      }
     } else {
       stroke(0);
-      
-      fill(255);
-      rect(myX+(mySize*2), myY-60, mySize, mySize, 5);
-      roll(myX+(mySize*2), myY-60);
-      
-      fill(255);
-      rect(myX+(mySize*2), myY-30, mySize, mySize, 5);
-      roll(myX+(mySize*2), myY-30);
-      
-      fill(255);
-      rect(myX+(mySize*2), myY, mySize, mySize, 5);
-      roll(myX+(mySize*2), myY);
+      for (int i = 0; i < 3; i++){
+        fill(255);
+        rect(myX+(mySize*2), myY-(i*30), mySize, mySize, 5);
+        roll(myX+(mySize*2), myY-(i*30));
+      }
     }
+    
     textSize(70);
     fill(140);
     text(mySum, 130,70);
