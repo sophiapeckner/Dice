@@ -1,22 +1,25 @@
 Die myDie;
+// snake's HEAD position
 int snakeX = 50;
 int snakeY = 150;
-int appleX;
-int appleY;
 int len = 6;
-boolean ate = false;
-boolean horizontal = true;
+// snake's BODY position
 String direction;
+// init apple's coord
+int appleX, appleY;
+boolean ate = false;   // checks whether apple v. snake collision occurred
 
 void setup() {
-  noLoop();
   size(420, 420);
+  noLoop();
   ate = true;
 }
 
+// ~ draws snake whenever according to keys pressed ~
 void draw() {
   drawGrid();
-  myDie = new Die(snakeX, snakeY, horizontal, len);
+  // create Die instance
+  myDie = new Die(snakeX, snakeY, len);
   myDie.show();
   drawApple();
   boolean hit = checkCollision(appleX, appleY, 20, snakeX, snakeY, 30, 30);
@@ -27,6 +30,7 @@ void draw() {
   }
 }
 
+// ~ draws background ~
 void drawGrid() {
   noStroke();
   boolean light = true;
@@ -44,8 +48,9 @@ void drawGrid() {
   }
 }
 
+// ~ draws a circle at a random position ~
 void drawApple() {
-   if (ate) {
+   if (ate) {    // only draw a new apple IF the previous one was 'ate' by the snake
      appleX = (int) (Math.random() * 300);
      appleY = (int) (Math.random() * 300);
      ate = false;
@@ -77,40 +82,36 @@ boolean checkCollision(float cx, float cy, float r, float rx, float ry, float rw
   return false;
 }
 
+// ~ sets new direction and snake's coordinate whenever a key is pressed ~ 
 void keyPressed() {
   if (keyCode == RIGHT){
     snakeX += 5;
-    horizontal = true;
     direction = "RIGHT";
   }
   else if (keyCode == LEFT){
     snakeX -= 5;
-    horizontal = true;
     direction = "LEFT";
   }
   else if (keyCode == UP){
     snakeY -= 5;
-    horizontal = false;
     direction = "UP";
   }
   else if (keyCode == DOWN){
     snakeY += 5;
-    horizontal = false;
     direction = "DOWN";
   }
   redraw();
 }
 
+// ~ draws die and its sides ~
 class Die {
   //member variable declarations
   int mySize, myX, myY, myValue, mySum, snakeLength;
-  boolean horizontal;
-  Die(int x, int y, boolean h, int l) {   //constructor   
+  Die(int x, int y, int l) {   //constructor   
     //variable initializations
     mySize = 30;
     myX = x;
     myY = y;
-    horizontal = h;
     snakeLength = l;
   }
 
@@ -158,33 +159,22 @@ class Die {
   }
 
   void show() {
-    mySum = 0;
+    mySum = 0;  // resets sum every time key is pressed
     stroke(0);
-    if (direction == "RIGHT"){
-      for (int i = 0; i < snakeLength; i ++){
-        if (i == 0) fill(100);
-        else fill(255);
+    for (int i = 0; i < snakeLength; i ++){
+      fill(162, 210, 255);  
+      if (i == 0) fill(237, 246, 249);  // snake's head
+      
+      if (direction == "RIGHT") {
         rect(myX-(i*30), myY, mySize, mySize, 5);
         roll(myX-(i*30), myY);
-      }
-    } else if (direction == "LEFT"){
-      for (int i = 0; i < snakeLength; i ++){
-        if (i == 0) fill(100);
-        else fill(255);
+      } else if (direction == "LEFT") {
         rect(myX+(i*30), myY, mySize, mySize, 5);
         roll(myX+(i*30), myY);
-      }
-    } else if (direction == "UP") {
-      for (int i = 0; i < snakeLength; i++){
-        if (i == 0) fill(100);
-        else fill(255);
+      } else if (direction == "UP") {
         rect(myX, myY+(i*30), mySize, mySize, 5);
         roll(myX, myY+(i*30));
-      }
-    } else {
-      for (int i = 0; i < snakeLength; i++){
-        if (i == 0) fill(100);
-        else fill(255);
+      } else if (direction == "DOWN") {
         rect(myX, myY-(i*30), mySize, mySize, 5);
         roll(myX, myY-(i*30));
       }
