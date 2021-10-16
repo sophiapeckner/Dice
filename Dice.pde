@@ -3,6 +3,7 @@ int snakeX = 50;
 int snakeY = 150;
 int appleX;
 int appleY;
+int len = 6;
 boolean ate = false;
 boolean horizontal = true;
 
@@ -14,13 +15,14 @@ void setup() {
 
 void draw() {
   drawGrid();
-  myDie = new Die(snakeX, snakeY, horizontal);
+  myDie = new Die(snakeX, snakeY, horizontal, len);
   myDie.show();
   drawApple();
   boolean hit = checkCollision(appleX, appleY, 20, snakeX, snakeY, 30, 30);
   if (hit) {
     ate = true;
     drawApple();
+    len++;
   }
 }
 
@@ -96,15 +98,15 @@ void keyPressed() {
 
 class Die {
   //member variable declarations
-  int mySize, myX, myY, myValue;
+  int mySize, myX, myY, myValue, mySum, snakeLength;
   boolean horizontal;
-  int mySum;
-  Die(int x, int y, boolean h) {   //constructor   
+  Die(int x, int y, boolean h, int l) {   //constructor   
     //variable initializations
     mySize = 30;
     myX = x;
     myY = y;
     horizontal = h;
+    snakeLength = l;
   }
 
   void roll(int x, int y) {
@@ -154,14 +156,14 @@ class Die {
     mySum = 0;
     stroke(0);
     if (horizontal){
-      for (int i = 0; i < 7; i ++){
+      for (int i = 0; i < snakeLength; i ++){
         if (i == 0) fill(100);
         else fill(255);
         rect(myX-(i*30), myY, mySize, mySize, 5);
         roll(myX-(i*30), myY);
       }
     } else {
-      for (int i = 0; i < 7; i++){
+      for (int i = 0; i < snakeLength; i++){
         if (i == 0) fill(100);
         else fill(255);
         rect(myX, myY+(i*30), mySize, mySize, 5);
@@ -171,6 +173,6 @@ class Die {
     
     textSize(70);
     fill(140);
-    text(mySum, 130,70);
+    text(mySum, 180,70);
   }
 }
