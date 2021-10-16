@@ -6,6 +6,7 @@ int appleY;
 int len = 6;
 boolean ate = false;
 boolean horizontal = true;
+String direction;
 
 void setup() {
   noLoop();
@@ -80,18 +81,22 @@ void keyPressed() {
   if (keyCode == RIGHT){
     snakeX += 5;
     horizontal = true;
+    direction = "RIGHT";
   }
   else if (keyCode == LEFT){
     snakeX -= 5;
     horizontal = true;
+    direction = "LEFT";
   }
   else if (keyCode == UP){
     snakeY -= 5;
     horizontal = false;
+    direction = "UP";
   }
   else if (keyCode == DOWN){
     snakeY += 5;
     horizontal = false;
+    direction = "DOWN";
   }
   redraw();
 }
@@ -155,24 +160,41 @@ class Die {
   void show() {
     mySum = 0;
     stroke(0);
-    if (horizontal){
+    if (direction == "RIGHT"){
       for (int i = 0; i < snakeLength; i ++){
         if (i == 0) fill(100);
         else fill(255);
         rect(myX-(i*30), myY, mySize, mySize, 5);
         roll(myX-(i*30), myY);
       }
-    } else {
+    } else if (direction == "LEFT"){
+      for (int i = 0; i < snakeLength; i ++){
+        if (i == 0) fill(100);
+        else fill(255);
+        rect(myX+(i*30), myY, mySize, mySize, 5);
+        roll(myX+(i*30), myY);
+      }
+    } else if (direction == "UP") {
       for (int i = 0; i < snakeLength; i++){
         if (i == 0) fill(100);
         else fill(255);
         rect(myX, myY+(i*30), mySize, mySize, 5);
         roll(myX, myY+(i*30));
       }
+    } else {
+      for (int i = 0; i < snakeLength; i++){
+        if (i == 0) fill(100);
+        else fill(255);
+        rect(myX, myY-(i*30), mySize, mySize, 5);
+        roll(myX, myY-(i*30));
+      }
     }
     
     textSize(70);
     fill(140);
     text(mySum, 180,70);
+    textSize(15);
+    fill(0);
+    text(snakeLength+" die snake", 330,400);
   }
 }
